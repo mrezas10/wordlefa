@@ -17,8 +17,11 @@ export const WordsSlice = createSlice({
     acceptWord: (state, action) => {
       state[action.payload.index].accepted = true;
     },
+    successful: (state) => {
+      state.forEach((item) => (item.accepted = true));
+    },
   },
 });
 
-export const { updateWord, acceptWord } = WordsSlice.actions;
+export const { updateWord, acceptWord, successful } = WordsSlice.actions;
 export default WordsSlice.reducer;
