@@ -7,7 +7,7 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
   const word = useSelector((state) => state.words[wordIndex].word);
   const accepted = useSelector((state) => state.words[wordIndex].accepted);
   useEffect(() => {
-    if (accepted === true) {
+    if (accepted && word[letterIndex]) {
       let indexesTW = [];
       for (let i = 0; i < 5; i++) {
         let index = todaysWord.indexOf(
@@ -35,30 +35,37 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
             indexesAW.filter((item) => word[item] === todaysWord[item])
               .length === indexesTW.length
           ) {
-            setColor("white");
+            setColor("#3a3a3c");
           } else {
-            setColor("yellow");
+            setColor("#b59f3b");
           }
         } else {
-          setColor("green");
+          setColor("#538d4e");
         }
       } else {
-        setColor("white");
+        setColor("#3a3a3c");
       }
+    } else {
+      setColor("#121213");
     }
-  }, [accepted]);
+  }, [accepted, todaysWord, word, letterIndex]);
   return (
     <Box
       sx={{
-        margin: "1rem",
-        width: "2rem",
-        height: "2rem",
+        margin: ".15rem",
+        width: "3.62rem",
+        height: "3.62rem",
         bgcolor: color,
-        border: "1px solid black",
+        border:
+          accepted && word[letterIndex]
+            ? "2px solid " + color
+            : "2px solid #3a3a3c",
         display: "flex",
         alignItems: "center",
         alignContent: "center",
         justifyContent: "center",
+        color: "white",
+        fontSize: "2rem",
       }}
     >
       {word[letterIndex]}
