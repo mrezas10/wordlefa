@@ -5888,7 +5888,6 @@ export const acceptedWords = [
   "یغیضک",
   "یقینا",
   "یقینى",
-  "یقینی",
   "یمکان",
   "یمینی",
   "ینتظر",
@@ -5914,11 +5913,4 @@ export const acceptedWords = [
   "ﺁخرین",
 ];
 
-export const possibleAnswers = [
-  "آتشین",
-  "راحتی",
-  "نگارش",
-  "کیمیا",
-  "گیلان",
-  "یگانه",
-];
+export const possibleAnswers = ["راحتی", "نگارش", "کیمیا", "گیلان", "یگانه"];
