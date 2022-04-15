@@ -27,6 +27,8 @@ function Wordle() {
     if (index !== -1) {
       switch (e.key) {
         case "آ":
+        case "ژ":
+        case "ء":
         case "ض":
         case "ص":
         case "ث":
@@ -58,30 +60,36 @@ function Wordle() {
         case "ذ":
         case "د":
         case "ئ":
-          words[index].word.length < 5
-            ? dispatch(
-                updateWord({
-                  index: index,
-                  newWord: words[index].word + e.key,
-                })
-              )
-            : setDummy(!dummy);
+        case "و":
+          if (words[index].word.length < 5) {
+            dispatch(
+              updateWord({
+                index: index,
+                newWord: words[index].word + e.key,
+              })
+            );
+            setDummy(!dummy);
+          } else setDummy(!dummy);
           break;
         case "Enter":
-          words[index].word.length === 5 ? checkWord() : setDummy(!dummy);
+          if (words[index].word.length === 5) {
+            checkWord();
+            setDummy(!dummy);
+          } else setDummy(!dummy);
           break;
         case "Backspace":
-          words[index].word.length > 0
-            ? dispatch(
-                updateWord({
-                  index: index,
-                  newWord: words[index].word.slice(
-                    0,
-                    words[index].word.length - 1
-                  ),
-                })
-              )
-            : setDummy(!dummy);
+          if (words[index].word.length > 0) {
+            dispatch(
+              updateWord({
+                index: index,
+                newWord: words[index].word.slice(
+                  0,
+                  words[index].word.length - 1
+                ),
+              })
+            );
+            setDummy(!dummy);
+          } else setDummy(!dummy);
           break;
         default:
           setDummy(!dummy);
@@ -92,7 +100,7 @@ function Wordle() {
   };
   useEffect(() => {
     window.addEventListener("keydown", wordHandler);
-  });
+  }, [dummy]);
   return (
     <Box
       sx={{

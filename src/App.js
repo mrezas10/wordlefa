@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import Wordle from "./components/Wordle";
 import TopNavBar from "./components/TopNavBar";
+import VirtualKeyboard from "./components/VirtualKeyboard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     >
       <TopNavBar />
       <Wordle />
+      <VirtualKeyboard />
     </Box>
   );
 }
