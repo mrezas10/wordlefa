@@ -11,3 +11,17 @@ code {
   font-family: "Shabnam", "Clear Sans", source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes letter-in {
+    0%   {transform: scale(1);}
+    50%  {transform: scale(1.1);}
+    100% {transform: scale(1);}
+}
+
+@keyframes accepted-letter {
+  0%   {transform: rotateX(0deg);}
+  25%   {transform: rotateX(45deg);}
+  50%  {transform: rotateX(90deg)}
+  75%   {transform: rotateX(45deg);}
+  100% {transform: rotateX(0deg);}
+}

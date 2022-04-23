@@ -3,11 +3,18 @@ import { Box } from "@mui/material";
 import LetterFill from "./LetterFill";
 import "../App.css";
 import { useEffect, useState } from "react";
-import { updateWord, acceptWord, successful } from "../redux/reducer";
+import { updateWord, acceptWord, successful, resetAll } from "../redux/reducer";
+import {
+  updateIndex,
+  resetStreak,
+  updateSolved,
+  updateFailed,
+} from "../redux/newWordReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 function Wordle() {
-  const todaysWord = possibleAnswers[0];
+  const newWord = useSelector((state) => state.newWord);
+  const todaysWord = possibleAnswers[newWord.index];
   const dispatch = useDispatch();
   const index = useSelector((state) =>
     state.words.findIndex((item) => item.accepted === false)
@@ -16,8 +23,13 @@ function Wordle() {
   const [dummy, setDummy] = useState(false);
   const checkWord = () => {
     if (acceptedWords.findIndex((item) => item === words[index].word) > -1) {
-      if (words[index].word === todaysWord) dispatch(successful());
-      else dispatch(acceptWord({ index: index }));
+      if (words[index].word === todaysWord) {
+        dispatch(successful());
+        dispatch(updateSolved());
+      } else if (index === 5) {
+        dispatch(updateFailed());
+        dispatch(acceptWord({ index: index }));
+      } else dispatch(acceptWord({ index: index }));
     } else {
       setDummy(!dummy);
     }
@@ -101,6 +113,23 @@ function Wordle() {
   useEffect(() => {
     window.addEventListener("keydown", wordHandler);
   }, [dummy]);
+
+  useEffect(() => {
+    let diff = (new Date() - newWord.date) / 3600000 / 24;
+    if (diff >= 1) {
+      if (newWord.index !== Math.floor(diff)) {
+        dispatch(
+          updateIndex({
+            newIndex: Math.floor(diff),
+          })
+        );
+        dispatch(resetAll());
+        if (diff - newWord.index >= 2) {
+          dispatch(resetStreak());
+        }
+      }
+    }
+  }, [newWord]);
   return (
     <Box
       sx={{

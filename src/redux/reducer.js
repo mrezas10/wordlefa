@@ -20,8 +20,15 @@ export const WordsSlice = createSlice({
     successful: (state) => {
       state.forEach((item) => (item.accepted = true));
     },
+    resetAll: (state) => {
+      state.forEach((item) => {
+        item.word = "";
+        item.accepted = false;
+      });
+    },
   },
 });
 
-export const { updateWord, acceptWord, successful } = WordsSlice.actions;
+export const { updateWord, acceptWord, successful, resetAll } =
+  WordsSlice.actions;
 export default WordsSlice.reducer;

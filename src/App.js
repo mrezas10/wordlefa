@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import Wordle from "./components/Wordle";
 import TopNavBar from "./components/TopNavBar";
 import VirtualKeyboard from "./components/VirtualKeyboard";
+import InfoPopUp from "./components/InfoPopUp";
 
 function App() {
   return (

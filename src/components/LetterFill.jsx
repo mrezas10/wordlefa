@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
-  const [color, setColor] = useState("white");
+  const [color, setColor] = useState("#121213");
   const word = useSelector((state) => state.words[wordIndex].word);
   const accepted = useSelector((state) => state.words[wordIndex].accepted);
   useEffect(() => {
@@ -59,6 +59,8 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
         border:
           accepted && word[letterIndex]
             ? "2px solid " + color
+            : word[letterIndex]
+            ? "2px solid #565758"
             : "2px solid #3a3a3c",
         display: "flex",
         alignItems: "center",
@@ -66,6 +68,14 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
         justifyContent: "center",
         color: "white",
         fontSize: "2rem",
+        transition: accepted && `all .1s`,
+        transitionDelay: accepted && `${letterIndex * 0.3 + 0.35}s`,
+        animationName: accepted
+          ? "accepted-letter"
+          : word[letterIndex] && "letter-in",
+        animationDuration:
+          accepted && word[letterIndex] ? ".7s" : word[letterIndex] && ".1s",
+        animationDelay: accepted && `${letterIndex * 0.3}s`,
       }}
     >
       {word[letterIndex]}

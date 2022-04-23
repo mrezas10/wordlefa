@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import WordsReducer from "./reducer";
+import NewWordReducer from "./newWordReducer";
 
 const persistConfig = {
   key: "root",
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const reducer = combineReducers({
   words: WordsReducer,
+  newWord: NewWordReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -3,8 +3,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SettingsIcon from "@mui/icons-material/Settings";
+import InfoPopUp from "./InfoPopUp";
+import { useState } from "react";
 
 const TopNavBar = () => {
+  const [openHelp, setOpenHelp] = useState(false);
   return (
     <AppBar
       sx={{
@@ -25,8 +28,10 @@ const TopNavBar = () => {
           fontSize: "2rem",
         }}
       >
-        <MenuIcon fontSize="inherit" />
-        <HelpOutlineIcon fontSize="inherit" />
+        <HelpOutlineIcon
+          onClick={() => setOpenHelp(true) && console.log(openHelp)}
+          fontSize="inherit"
+        />
       </Box>
       <Typography sx={{}} fontFamily={"Shabnam"} fontSize={"2rem"}>
         واژگانه
@@ -39,8 +44,8 @@ const TopNavBar = () => {
         }}
       >
         <BarChartIcon fontSize="inherit" />
-        <SettingsIcon fontSize="inherit" />
       </Box>
+      <InfoPopUp open={openHelp} setOpen={setOpenHelp} />
     </AppBar>
   );
 };

@@ -6,11 +6,12 @@ import { updateWord, acceptWord, successful } from "../redux/reducer";
 import { acceptedWords, possibleAnswers } from "../words";
 
 const VirtualKey = ({ keyLetter }) => {
+  const newWord = useSelector((state) => state.newWord);
   const index = useSelector((state) =>
     state.words.findIndex((item) => item.accepted === false)
   );
   const [color, setColor] = useState("#818384");
-  const todaysWord = possibleAnswers[0];
+  const todaysWord = possibleAnswers[newWord.index];
   const [dummy, setDummy] = useState(false);
   const words = useSelector((state) => state.words);
   const dispatch = useDispatch();
