@@ -5,6 +5,7 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import WordsReducer from "./reducer";
 import NewWordReducer from "./newWordReducer";
+import DisplayPopUpReducer from "./displayPopUpReducer";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 const reducer = combineReducers({
   words: WordsReducer,
   newWord: NewWordReducer,
+  displayPopUp: DisplayPopUpReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

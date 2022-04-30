@@ -1,9 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { height } from "@mui/system";
 import PN from "persian-number";
+import { useSelector, useDispatch } from "react-redux";
+import { ToggleHelp } from "../redux/displayPopUpReducer";
 
-const InfoPopUp = ({ open, setOpen }) => {
+const InfoPopUp = () => {
+  const open = useSelector((state) => state.displayPopUp.help);
+  const dispatch = useDispatch();
   return (
     open && (
       <Box
@@ -44,7 +47,7 @@ const InfoPopUp = ({ open, setOpen }) => {
             </Typography>
           </Box>
           <Box
-            onClick={() => setOpen(false)}
+            onClick={() => dispatch(ToggleHelp())}
             sx={{
               position: "absolute",
               top: ".8rem",

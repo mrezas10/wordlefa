@@ -90,7 +90,9 @@ const VirtualKey = ({ keyLetter }) => {
       todaysWord.includes(keyLetter)
     )
       setColor("#538d4e");
-  }, [index]);
+    else if (index !== -1 && words[index].word.length === 0)
+      setColor("#818384");
+  }, [index, newWord]);
   return (
     <Box
       onClick={wordUpdater}

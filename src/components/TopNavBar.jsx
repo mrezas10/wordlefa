@@ -4,10 +4,13 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SettingsIcon from "@mui/icons-material/Settings";
 import InfoPopUp from "./InfoPopUp";
+import StatsPopUp from "./StatsPopUp";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { ToggleHelp, ToggleStats } from "../redux/displayPopUpReducer";
 
 const TopNavBar = () => {
-  const [openHelp, setOpenHelp] = useState(false);
+  const dispatch = useDispatch();
   return (
     <AppBar
       sx={{
@@ -29,7 +32,7 @@ const TopNavBar = () => {
         }}
       >
         <HelpOutlineIcon
-          onClick={() => setOpenHelp(true) && console.log(openHelp)}
+          onClick={() => dispatch(ToggleHelp())}
           fontSize="inherit"
         />
       </Box>
@@ -43,9 +46,13 @@ const TopNavBar = () => {
           fontSize: "2rem",
         }}
       >
-        <BarChartIcon fontSize="inherit" />
+        <BarChartIcon
+          onClick={() => dispatch(ToggleStats())}
+          fontSize="inherit"
+        />
       </Box>
-      <InfoPopUp open={openHelp} setOpen={setOpenHelp} />
+      <InfoPopUp />
+      <StatsPopUp />
     </AppBar>
   );
 };

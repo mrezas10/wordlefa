@@ -1,5 +1,5 @@
 import { acceptedWords, possibleAnswers } from "../words";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import LetterFill from "./LetterFill";
 import "../App.css";
 import { useEffect, useState } from "react";
@@ -9,7 +9,9 @@ import {
   resetStreak,
   updateSolved,
   updateFailed,
+  updateGuess,
 } from "../redux/newWordReducer";
+import { ToggleStats } from "../redux/displayPopUpReducer";
 import { useSelector, useDispatch } from "react-redux";
 
 function Wordle() {
@@ -24,11 +26,14 @@ function Wordle() {
   const checkWord = () => {
     if (acceptedWords.findIndex((item) => item === words[index].word) > -1) {
       if (words[index].word === todaysWord) {
+        dispatch(updateGuess({ index: index }));
         dispatch(successful());
         dispatch(updateSolved());
+        setTimeout(() => dispatch(ToggleStats()), 2000);
       } else if (index === 5) {
         dispatch(updateFailed());
         dispatch(acceptWord({ index: index }));
+        setTimeout(() => dispatch(ToggleStats()), 2000);
       } else dispatch(acceptWord({ index: index }));
     } else {
       setDummy(!dummy);
@@ -115,7 +120,8 @@ function Wordle() {
   }, [dummy]);
 
   useEffect(() => {
-    let diff = (new Date() - newWord.date) / 3600000 / 24;
+    let now = new Date();
+    let diff = (now.getTime() - newWord.date) / 3600000 / 24;
     if (diff >= 1) {
       if (newWord.index !== Math.floor(diff)) {
         dispatch(
@@ -135,8 +141,26 @@ function Wordle() {
       sx={{
         display: "flex",
         flexDirection: "column",
+        alignItems: "center",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          visibility: index === -1 ? "visible" : "hidden",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "white",
+          borderRadius: "5px",
+          width: "5rem",
+          height: "3rem",
+          margin: "1rem",
+        }}
+      >
+        <Typography fontFamily={"Shabnam"} fontWeight={"bold"}>
+          {todaysWord}
+        </Typography>
+      </Box>
       {words.map((word, wordIndex) => (
         <Box
           key={wordIndex}
