@@ -35,7 +35,7 @@ const StatsPopUp = () => {
             boxSizing: "border-box",
             margin: "auto",
             padding: "0 2rem",
-            width: "31.3rem",
+            width: { xs: "90%", sm: "31.3rem" },
             bgcolor: "#121213",
             height: "26.5rem",
             borderRadius: "10px",

@@ -99,20 +99,27 @@ const VirtualKey = ({ keyLetter }) => {
       sx={{
         margin: ".2rem",
         height: "3.6rem",
-        minWidth: "1.5rem",
-        padding: "0 .6rem",
+        minWidth: { xs: "5%", sm: "1.5rem" },
+        padding: { xs: "0", sm: "0 .6rem" },
         borderRadius: "5px",
         bgcolor: color,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontSize: "1.1rem",
+        fontSize: {
+          xs: String(keyLetter) === "Enter" ? ".5rem" : ".8rem",
+          sm: "1.1rem",
+        },
         color: "#ffffff",
         cursor: "pointer",
       }}
     >
       {String(keyLetter) === "Backspace" ? (
-        <BackspaceIcon fontSize="medium" />
+        <BackspaceIcon
+          sx={{
+            fontSize: { xs: "small", sm: "medium" },
+          }}
+        />
       ) : (
         String(keyLetter)
       )}

@@ -24,9 +24,9 @@ const InfoPopUp = () => {
             boxSizing: "border-box",
             margin: "auto",
             padding: "0 2rem",
-            width: "35rem",
+            width: { xs: "90%", sm: "35rem" },
             bgcolor: "#121213",
-            height: "35rem",
+            height: { xs: "fit-content", sm: "35rem" },
           }}
         >
           <Box

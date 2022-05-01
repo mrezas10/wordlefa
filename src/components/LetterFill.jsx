@@ -53,8 +53,8 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
     <Box
       sx={{
         margin: ".15rem",
-        width: "3.62rem",
-        height: "3.62rem",
+        width: { xs: "10vw", sm: "3.62rem" },
+        height: { xs: "10vw", sm: "3.62rem" },
         bgcolor: color,
         border:
           accepted && word[letterIndex]
@@ -67,7 +67,7 @@ const LetterFill = ({ todaysWord, wordIndex, letterIndex }) => {
         alignContent: "center",
         justifyContent: "center",
         color: "white",
-        fontSize: "2rem",
+        fontSize: { xs: "5vw", sm: "2rem" },
         transition: accepted && `all .1s`,
         transitionDelay: accepted && `${letterIndex * 0.3 + 0.35}s`,
         animationName: accepted
